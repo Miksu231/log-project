@@ -2,15 +2,15 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    '@nuxtjs/eslint-config-typescript',
-    'plugin:vue/vue3-recommended',
+    "@nuxtjs/eslint-config-typescript",
+    "plugin:vue/vue3-recommended",
     "prettier",
   ],
-  parser: 'vue-eslint-parser',
+  parser: "vue-eslint-parser",
   parserOptions: {
     parser: "@typescript-eslint/parser",
   },
-  plugins: ["@typescript-eslint", ],
+  plugins: ["@typescript-eslint"],
   root: true,
   ignorePatterns: ["coverage/*"],
   overrides: [
@@ -53,9 +53,6 @@ module.exports = {
 
     "func-call-spacing": "off",
     "@typescript-eslint/func-call-spacing": "warn",
-
-    indent: "off",
-    "@typescript-eslint/indent": ["warn", "tab"],
 
     "keyword-spacing": "off",
     "@typescript-eslint/keyword-spacing": "warn",
