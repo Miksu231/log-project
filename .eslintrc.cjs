@@ -41,7 +41,7 @@ module.exports = {
       "warn",
       { assertionStyle: "never" },
     ],
-
+    "vue/multi-word-component-names": "off",
     "brace-style": "off",
     "@typescript-eslint/brace-style": "warn",
 
