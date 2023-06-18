@@ -1,3 +1,10 @@
+<script setup lang="ts">
+definePageMeta({
+  linkTitle: "Home",
+  order: 0,
+})
+</script>
+
 <template>
-    <p> Hello, welcome to this site </p>
+  <HelloWorld />
 </template>

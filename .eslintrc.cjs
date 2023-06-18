@@ -45,8 +45,11 @@ module.exports = {
     "brace-style": "off",
     "@typescript-eslint/brace-style": "warn",
 
+    "no-extra-parens": "off",
+    "@typescript-eslint/no-extra-parens": "warn",
+
     "comma-dangle": "off",
-    "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
+    "@typescript-eslint/comma-dangle": "off",
 
     "comma-spacing": "off",
     "@typescript-eslint/comma-spacing": "warn",
@@ -60,7 +63,7 @@ module.exports = {
     "@typescript-eslint/member-delimiter-style": "warn",
 
     "no-extra-parens": "off",
-    "@typescript-eslint/no-extra-parens": "warn",
+    "@typescript-eslint/no-extra-parens": "off",
 
     "object-curly-spacing": "off",
     "@typescript-eslint/object-curly-spacing": ["warn", "always"],
@@ -82,4 +85,4 @@ module.exports = {
 
     "@typescript-eslint/type-annotation-spacing": "error",
   },
-};
+}
