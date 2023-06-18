@@ -8,6 +8,7 @@ import {
   orderBy,
   query,
   Timestamp,
+  where,
 } from "firebase/firestore"
 import {
   definePageMeta,
@@ -27,9 +28,10 @@ definePageMeta({
 
 const content = useLocalStorage("note-content", "")
 
-const lastNotes = useCollection<{ content: string; createdAt: Timestamp }>(
+const lastNotes = useCollection(
   query(
-    collection(db, "users", user.value!.uid, "notes"),
+    collection(db, "notes"),
+    where("userId", "==", user.value?.uid),
     orderBy("createdAt", "desc"),
     limit(5)
   ),
@@ -47,8 +49,9 @@ const {
       return Promise.reject(new Error("Invalid post"))
     }
 
-    return addDoc(collection(db, "users", user.value.uid, "notes"), {
+    return addDoc(collection(db, "notes"), {
       content: content.value,
+      userId: user.value.uid,
       createdAt: serverTimestamp(),
     }).then(() => {
       // reset the post content if successful
@@ -69,14 +72,7 @@ const {
 
     <form @submit.prevent="createNote()">
       <fieldset :disabled="isCreatingNote">
-        <MyTextarea
-          id="content"
-          v-model="content"
-          placeholder="The other day I was..."
-          :maxlength="512"
-          required
-        />
-
+        <UTextarea v-model="content" size="xl" />
         <input type="submit" value="Save Note" />
       </fieldset>
     </form>
