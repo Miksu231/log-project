@@ -9,6 +9,12 @@ import {
   query,
   Timestamp,
 } from "firebase/firestore"
+import {
+  definePageMeta,
+  useCollection,
+  useCurrentUser,
+  useFirestore,
+} from "~/.nuxt/imports"
 
 const user = useCurrentUser()
 const db = useFirestore()

@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["nuxt-vuefire"],
+  modules: ["nuxt-vuefire", "@nuxthq/ui"],
   ssr: false,
 
   nitro: {
@@ -42,6 +42,9 @@ export default defineNuxtConfig({
       appId: "1:525257340348:web:12302b7721a59454fce7b9",
       measurementId: "G-0QH6YDGBZR",
     },
+  },
+  build: {
+    transpile: ["@vuepic/vue-datepicker"],
   },
 
   routeRules: {},

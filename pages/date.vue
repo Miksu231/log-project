@@ -1,12 +1,11 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { definePageMeta } from "~/.nuxt/imports"
-
 definePageMeta({
-  linkTitle: "Home",
-  order: 0,
+  linkTitle: "Date",
+  order: 6,
 })
 </script>
-
 <template>
-  <HelloWorld />
+  <p>Hello</p>
+  <DatePicker />
 </template>

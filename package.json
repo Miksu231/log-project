@@ -12,6 +12,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^5.3.0",
     "@vueuse/core": "^9.10.0",
     "firebase": "^9.15.0",
     "firebase-admin": "^11.4.1",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@nuxt/devtools": "^0.6.1",
     "@nuxt/test-utils": "^3.5.3",
+    "@nuxthq/ui": "^2.4.0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "eslint": "^8.43.0",
