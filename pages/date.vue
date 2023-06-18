@@ -6,6 +6,5 @@ definePageMeta({
 })
 </script>
 <template>
-  <p>Hello</p>
   <DatePicker />
 </template>

@@ -11,8 +11,6 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(["@update:model-value", "@closed"])
-
 const colorMode = useColorMode()
 
 const isDark = computed(() => colorMode.value === "dark")
