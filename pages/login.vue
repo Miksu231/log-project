@@ -3,7 +3,6 @@ import {
   GoogleAuthProvider,
   getRedirectResult,
   signInAnonymously,
-  signInWithPopup,
   signInWithRedirect,
   signOut,
 } from "firebase/auth"
@@ -67,17 +66,33 @@ const route = useRoute()
         <br />
         <strong>{{ user.displayName }}.</strong>
         <br />
-        <button class="logButton" @click="signOut(auth)">Logout</button>
+        <UButton
+          color="blue"
+          variant="soft"
+          class="logButton"
+          @click="signOut(auth)"
+          >Logout</UButton
+        >
       </template>
 
       <template v-else>
-        <button class="logButton" @click="signinRedirect()">
+        <UButton
+          color="blue"
+          variant="soft"
+          class="logButton"
+          @click="signinRedirect()"
+        >
           SignIn with Google (redirect)
-        </button>
+        </UButton>
         <br />
-        <button class="logButton" @click="signInAnonymously(auth)">
+        <UButton
+          color="blue"
+          variant="soft"
+          class="logButton"
+          @click="signInAnonymously(auth)"
+        >
           SignIn Anonymously
-        </button>
+        </UButton>
       </template>
     </template>
   </main>
