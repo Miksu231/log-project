@@ -15,16 +15,6 @@ const links = [
     icon: "i-heroicons-calendar-days",
     to: "/date",
   },
-  {
-    label: "New",
-    icon: "i-heroicons-clipboard-document",
-    to: "/posts/new",
-  },
-  {
-    label: "Others",
-    icon: "i-heroicons-list-bullet-solid",
-    to: "/posts/others",
-  },
 ]
 </script>
 

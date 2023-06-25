@@ -15,8 +15,8 @@
   --links: #00dc82;
   --code: currentColor;
 
-  --primary-color: #0b115e;
-  --secondary-color: #d1d3eb;
+  --primary-color: #1a5173;
+  --secondary-color: #e8e9f0;
   --success-color: #0f7d34;
   --failure-color: #b30505;
   --alert-color: #fc8c14;
@@ -34,6 +34,16 @@ a:hover {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+body {
+  background-color: var(--secondary-color);
 }
 
 .message-box {

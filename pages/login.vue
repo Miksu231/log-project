@@ -62,19 +62,17 @@ const route = useRoute()
       </div>
 
       <template v-if="user">
-        <p>
-          You are currently logged in as:
-          <br />
-          <img
-            v-if="user.photoURL"
-            class="avatar"
-            :src="user.photoURL"
-            referrerpolicy="no-referrer"
-          />
-          <br />
-          <strong>{{ user.displayName }}.</strong>
-        </p>
-
+        <p><b>You are currently logged in as:</b></p>
+        <UAvatar
+          v-if="user.photoURL"
+          class="avatar"
+          :src="user.photoURL"
+          size="2xl"
+          alt="Avatar"
+        />
+        <br />
+        <strong>{{ user.displayName }}.</strong>
+        <br />
         <button @click="signOut(auth)">Logout</button>
       </template>
 
@@ -91,7 +89,8 @@ const route = useRoute()
 
 <style scoped>
 .avatar {
-  padding: 1em 0;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 main > button {

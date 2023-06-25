@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import {
-  addDoc,
   doc,
   getDoc,
   serverTimestamp,
   setDoc,
   updateDoc,
-  collection,
 } from "firebase/firestore"
 
 const db = useFirestore()
@@ -15,10 +13,6 @@ const user = useCurrentUser()
 const router = useRouter()
 const route = useRoute()
 watch(user, async (currentUser, previousUser) => {
-  if (currentUser) {
-    addDoc(collection(db, "users"), currentUser)
-  }
-  // redirect to login if they logout
   if (!currentUser && previousUser) {
     return router.push({ name: "login" })
   }
@@ -51,7 +45,7 @@ watch(user, async (currentUser, previousUser) => {
 
 <template>
   <div class="mainPageLayout">
-    <h1>Calendar Log</h1>
+    <h1 class="topbar">Calendar Log</h1>
     <NavigationLinks class="sidebarNavigation" />
     <NuxtPage />
   </div>
@@ -68,11 +62,22 @@ watch(user, async (currentUser, previousUser) => {
   left: 0;
 }
 .mainPageLayout {
-  margin-left: 140px;
+  margin-left: 150px;
   display: flex;
-  flex-direction: column;
-  background-color: var(--secondary-color);
-  justify-content: center;
+  width: 100%;
   height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.topbar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
 </style>
