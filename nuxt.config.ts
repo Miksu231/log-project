@@ -1,13 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ["nuxt-vuefire", "@nuxthq/ui"],
-  ssr: false,
+  ssr: true,
 
   nitro: {
     prerender: {
       crawlLinks: false,
       routes: ["/"],
-      ignore: ["/posts/others"],
+      ignore: ["/login"],
     },
   },
 
@@ -40,6 +40,9 @@ export default defineNuxtConfig({
       messagingSenderId: "525257340348",
       appId: "1:525257340348:web:12302b7721a59454fce7b9",
       measurementId: "G-0QH6YDGBZR",
+    },
+    admin: {
+      serviceAccount: "./service-account.json",
     },
   },
   build: {

@@ -11,7 +11,6 @@ import {
 } from "firebase/firestore"
 import VueDatePicker from "@vuepic/vue-datepicker"
 import { useAsyncState, useColorMode, useLocalStorage } from "@vueuse/core"
-import { definePageMeta } from "~/.nuxt/imports"
 import "@vuepic/vue-datepicker/dist/main.css"
 definePageMeta({
   linkTitle: "Date",
@@ -46,7 +45,7 @@ const noteDocuments = computed(() =>
     orderBy("createdAt", "desc")
   )
 )
-const notes = useCollection(noteDocuments)
+const notes = useCollection(noteDocuments, { ssrKey: "notes" })
 const {
   execute: createNote,
   isLoading: isCreatingNote,
@@ -72,9 +71,13 @@ const {
   // avoid executing the function on mount
   { immediate: false }
 )
-const { execute: deleteNote } = useAsyncState((id) => {
-  return deleteDoc(doc(db, "notes", id))
-}, null)
+const { execute: deleteNote } = useAsyncState(
+  (id) => {
+    return deleteDoc(doc(db, "notes", id))
+  },
+  null,
+  { immediate: false }
+)
 </script>
 <template>
   <main>

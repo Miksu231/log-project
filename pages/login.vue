@@ -26,13 +26,6 @@ function signinRedirect() {
   })
 }
 
-function signinPopup() {
-  error.value = null
-  signInWithPopup(auth, googleAuthProvider).catch((reason) => {
-    error.value = reason
-  })
-}
-
 // display errors if any
 // eslint-disable-next-line no-self-compare
 const error = (ref < Error) | (null > null)
@@ -62,7 +55,8 @@ const route = useRoute()
       </div>
 
       <template v-if="user">
-        <p><b>You are currently logged in as:</b></p>
+        <b>You are currently logged in as:</b>
+        <br />
         <UAvatar
           v-if="user.photoURL"
           class="avatar"
@@ -73,15 +67,17 @@ const route = useRoute()
         <br />
         <strong>{{ user.displayName }}.</strong>
         <br />
-        <button @click="signOut(auth)">Logout</button>
+        <button class="logButton" @click="signOut(auth)">Logout</button>
       </template>
 
       <template v-else>
-        <button @click="signinRedirect()">SignIn with Google (redirect)</button>
+        <button class="logButton" @click="signinRedirect()">
+          SignIn with Google (redirect)
+        </button>
         <br />
-        <button @click="signinPopup()">SignIn with Google (popup)</button>
-        <br />
-        <button @click="signInAnonymously(auth)">SignIn Anonymously</button>
+        <button class="logButton" @click="signInAnonymously(auth)">
+          SignIn Anonymously
+        </button>
       </template>
     </template>
   </main>
@@ -93,7 +89,12 @@ const route = useRoute()
   margin-bottom: 16px;
 }
 
-main > button {
-  margin: 1em 0;
+.logButton {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 </style>
