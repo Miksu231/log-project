@@ -50,9 +50,29 @@ watch(user, async (currentUser, previousUser) => {
 </script>
 
 <template>
-  <div>
+  <div class="mainPageLayout">
     <h1>Calendar Log</h1>
-    <NavigationLinks />
+    <NavigationLinks class="sidebarNavigation"/>
     <NuxtPage />
   </div>
 </template>
+<style>
+  .sidebarNavigation {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+  }
+  .mainPageLayout {
+    margin-left: 140px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+    justify-content: center;
+    height: 100%;
+  }
+</style>

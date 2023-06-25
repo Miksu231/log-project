@@ -14,6 +14,13 @@
 
   --links: #00dc82;
   --code: currentColor;
+
+  --primary-color: #0b115e;
+  --secondary-color: #d1d3eb;
+  --success-color: #0f7d34;
+  --failure-color: #b30505;
+  --alert-color: #fc8c14;
+  
 }
 
 a {
