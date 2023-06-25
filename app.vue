@@ -54,8 +54,8 @@ watch(user, async (currentUser, previousUser) => {
 .sidebarNavigation {
   background-color: var(--primary-color);
   color: var(--secondary-color);
-  height: 100%;
-  width: 150px;
+  height: 100vh;
+  width: 10vw;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -64,7 +64,7 @@ watch(user, async (currentUser, previousUser) => {
 .mainPageLayout {
   margin-left: 150px;
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   flex-direction: column;
   justify-content: center;
