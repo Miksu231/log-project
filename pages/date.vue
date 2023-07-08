@@ -92,7 +92,6 @@ const { execute: editNote, isLoading: isSubmittingNoteEdit } = useAsyncState(
     if (!editedContent.value || !user.value) {
       return Promise.reject(new Error("Invalid note content"))
     }
-    console.log("Updating note")
     return updateDoc(doc(db, "notes", id), {
       content: editedContent.value,
       userId: user.value.uid,

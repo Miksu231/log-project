@@ -48,9 +48,9 @@ jobs:
         working-directory: .
         run: |
           npm install
-      - name: lint
+      - name: Run eslint
         run: |
           npm run lint
-      - name: format
+      - name: Run prettier
         run: |
           npm run format
