@@ -21,7 +21,7 @@ jobs:
           wait-on: "http://localhost:3000"
   lint-code:
     runs-on: ubuntu-22.04
-    needs: cypress-run
+    needs: install
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v2
