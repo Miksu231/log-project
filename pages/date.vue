@@ -8,21 +8,26 @@ import {
   where,
   deleteDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore"
 import VueDatePicker from "@vuepic/vue-datepicker"
 import { useAsyncState, useColorMode, useLocalStorage } from "@vueuse/core"
 import "@vuepic/vue-datepicker/dist/main.css"
+
 definePageMeta({
   linkTitle: "Date",
   order: 6,
   middleware: ["authenticated"],
 })
+
 const colorMode = useColorMode()
 const isDark = computed(() => colorMode.value === "dark")
 const db = useFirestore()
 const user = useCurrentUser()
 const date = ref()
 const isOpen = ref(false)
+const isEditing = ref(false)
+const editedContent = useLocalStorage("edited-content", "")
 const content = useLocalStorage("note-content", "")
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 const getDate = computed({
@@ -47,6 +52,7 @@ const noteDocuments = computed(() =>
   )
 )
 const notes = useCollection(noteDocuments, { ssrKey: "notes" })
+
 const {
   execute: createNote,
   isLoading: isCreatingNote,
@@ -72,9 +78,29 @@ const {
   // avoid executing the function on mount
   { immediate: false }
 )
+
 const { execute: deleteNote } = useAsyncState(
   (id) => {
     return deleteDoc(doc(db, "notes", id))
+  },
+  null,
+  { immediate: false }
+)
+
+const { execute: editNote, isLoading: isSubmittingNoteEdit } = useAsyncState(
+  (id) => {
+    if (!editedContent.value || !user.value) {
+      return Promise.reject(new Error("Invalid note content"))
+    }
+    console.log("Updating note")
+    return updateDoc(doc(db, "notes", id), {
+      content: editedContent.value,
+      userId: user.value.uid,
+      date: getDate.value,
+      createdAt: serverTimestamp(),
+    }).then(() => {
+      editedContent.value = ""
+    })
   },
   null,
   { immediate: false }
@@ -135,9 +161,28 @@ const { execute: deleteNote } = useAsyncState(
               </template>
               {{ note.content }}
               <template #footer>
-                <UButton color="red" variant="soft" @click="isOpen = true">
-                  Delete
-                </UButton>
+                <div class="buttonRow">
+                  <UButton
+                    class="deleteButton"
+                    color="red"
+                    variant="soft"
+                    @click="isOpen = true"
+                  >
+                    Delete
+                  </UButton>
+                  <!-- prettier-ignore -->
+                  <UButton
+                    class="deleteButton"
+                    color="yellow"
+                    variant="soft"
+                    @click="
+                      isEditing = true;
+                      editedContent = note.content
+                    "
+                  >
+                    Edit Note
+                  </UButton>
+                </div>
                 <UModal v-model="isOpen">
                   <div class="modal">
                     <p class="confirmationText">
@@ -161,6 +206,50 @@ const { execute: deleteNote } = useAsyncState(
                       >
                         <p class="deleteText">Yes</p>
                       </UButton>
+                    </div>
+                  </div>
+                </UModal>
+                <UModal v-model="isEditing">
+                  <div class="modal">
+                    <UFormGroup
+                      label="Edit note content"
+                      required
+                      :error="error ? (error as Error).message : ''"
+                    >
+                      <UTextarea
+                        v-if="isSubmittingNoteEdit"
+                        v-model="editedContent"
+                        size="xl"
+                        :disabled="true"
+                        color="gray"
+                      />
+                      <UTextarea
+                        v-else
+                        v-model="editedContent"
+                        size="xl"
+                        color="white"
+                      />
+                    </UFormGroup>
+                    <div class="buttonRow">
+                      <UButton
+                        color="red"
+                        variant="solid"
+                        class="deleteButton"
+                        @click="isEditing = false"
+                      >
+                        Cancel
+                      </UButton>
+                      <!-- prettier-ignore -->
+                      <UButton
+                            color="green"
+                            variant="solid"
+                            class="deleteButton"
+                            @click="editNote(0, note.id); isEditing = false"
+                          >
+                            <p class="deleteText">
+                              Save
+                            </p>
+                          </UButton>
                     </div>
                   </div>
                 </UModal>
@@ -195,6 +284,7 @@ const { execute: deleteNote } = useAsyncState(
   display: flex;
   flex-direction: row;
   justify-content: center;
+
   padding-top: 1rem;
 }
 .confirmationText {
