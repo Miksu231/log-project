@@ -35,6 +35,7 @@ jobs:
         working-directory: .
         run: |
           npm install
+          npm install -g pnpm
       - name: Cypress install
         uses: cypress-io/github-action@v5
         with:
