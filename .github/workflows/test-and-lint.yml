@@ -10,7 +10,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
+      - name: setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.12.0"
+      - name: Cache node dependencies for all modules
+        id: cache-npm
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of shared node modules
+        continue-on-error: true
+        run: npm list
+      - name: Install node dependencies and build assets
+        working-directory: .
+        run: |
+          npm install
       - name: Cypress install
         uses: cypress-io/github-action@v5
         with:
