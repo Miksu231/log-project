@@ -1,4 +1,5 @@
 {
+  "name": "log-project",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -7,9 +8,10 @@
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
-    "test": "jest",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "start": "nuxt start",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@firebase/app-types": "^0.9.0",
@@ -27,10 +29,11 @@
     "@nuxthq/ui": "^2.4.0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@types/jest": "^29.5.2",
+    "cypress": "^12.17.0",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-vue": "^9.15.0",
-    "jest": "^29.5.0",
     "prettier": "^2.8.8",
     "typescript": "^5.0.4"
   }

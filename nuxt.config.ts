@@ -28,8 +28,11 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["@/assets/style.css"],
+  devServer: {
+    host: "0.0.0.0",
+  },
 
+  css: ["@/assets/style.css"],
   vuefire: {
     auth: true,
     config: {

@@ -1,0 +1,56 @@
+name: test-changes
+run-name: Latest changes are being tested
+on:
+  push:
+    branches:
+      - main
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress install
+        uses: cypress-io/github-action@v5
+        with:
+          runTests: false
+          build: npm run build
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+
+  cypress-run:
+    runs-on: ubuntu-22.04
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folder
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
+
+      - name: Run cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm run dev & wait-on http://localhost:3000
+          browser: chrome
+  lint-code:
+    runs-on: ubuntu-22.04
+    needs: cypress-run
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v3
+      - name: lint
+        run: |
+          npm run lint
+      - name: format
+        run: |
+          npm run format
