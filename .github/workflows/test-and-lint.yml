@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cypress install
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v4
         with:
           runTests: false
           build: npm run build
@@ -37,7 +37,7 @@ jobs:
           path: build
 
       - name: Run cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v4
         with:
           start: npm run dev & wait-on http://localhost:3000
           browser: chrome
