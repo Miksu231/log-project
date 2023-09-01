@@ -11,7 +11,7 @@ const links = [
     to: "/login",
   },
   {
-    label: "Date Picker",
+    label: "Calendar",
     icon: "i-heroicons-calendar-days",
     to: "/date",
   },

@@ -82,7 +82,7 @@ const route = useRoute()
           class="logButton"
           @click="signinRedirect()"
         >
-          SignIn with Google (redirect)
+          Sign in with Google (redirect)
         </UButton>
         <br />
         <UButton
@@ -91,7 +91,7 @@ const route = useRoute()
           class="logButton"
           @click="signInAnonymously(auth)"
         >
-          SignIn Anonymously
+          Sign in Anonymously
         </UButton>
       </template>
     </template>
